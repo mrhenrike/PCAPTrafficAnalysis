@@ -17,7 +17,7 @@ Network packet captures collected in **laboratory and controlled environments** 
 | Category | Files | Description |
 |----------|-------|-------------|
 | **Modbus TCP** | `ICS-Modbus-001.pcap`, `ICS-Modbus-002.pcap`, `ICS-Modbus-003.pcap` | Modbus function codes, read/write coils and registers |
-| **Lab field tests** | `ColetaTF01.pcap`, `ColetaTF02.pcapng`, `ColetaTF03.pcap`, `ColetaTF04.pcap`, `ColetaTF05.pcapng` | Sequential captures from controlled ICS lab sessions |
+| **Lab field tests** | `ColetaTF01.pcap`, `ColetaTF02.pcap`, `ColetaTF03.pcap`, `ColetaTF04.pcap`, `ColetaTF05.pcapng` | Sequential captures from controlled ICS lab sessions |
 
 Coleções antigas (4SICS, S4x15, outros protocolos, malware zips) **não estão** neste repositório; commits anteriores a v2.0.0 deixaram de existir em `main`. Para ampliar a coleção, use cópias locais, releases arquivadas ou Git LFS noutro ramo conforme necessidade.
 
