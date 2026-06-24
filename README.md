@@ -8,18 +8,22 @@ Network packet captures collected in **laboratory and controlled environments** 
 
 > **Author:** Andre Henrique ([@mrhenrike](https://github.com/mrhenrike)) — LinkedIn/X: @mrhenrike
 
-**Version 2.0.0** — Histórico Git foi reescrito para um único commit: o clone contém apenas os ficheiros listados abaixo (~2 MiB de dados + metadados), sem blobs legacy no histórico.
-
 ---
 
-## Contents (current tree)
+## Contents
 
 | Category | Files | Description |
 |----------|-------|-------------|
+| **Lab field tests** | `ColetaTF01.pcap` – `ColetaTF09.pcap` | Sequential lab captures: Wi-Fi, TCP, SMTP, DNP3, Modbus, WPA2 handshakes |
 | **Modbus TCP** | `ICS-Modbus-001.pcap`, `ICS-Modbus-002.pcap`, `ICS-Modbus-003.pcap` | Modbus function codes, read/write coils and registers |
-| **Lab field tests** | `ColetaTF01.pcap`, `ColetaTF02.pcap`, `ColetaTF03.pcap`, `ColetaTF04.pcap`, `ColetaTF05.pcapng` | Sequential captures from controlled ICS lab sessions |
+| **DNP3** | `ICS-DNP3-001.pcap` – `ICS-DNP3-004.pcap` | DNP3 over TCP — application layer objects and timing |
+| **S7comm** | `ICS-S7-001.pcapng`, `ICS-S7-002.pcap` | Siemens S7/TIA communication over TCP port 102 |
+| **PROFINET** | `ICS-Profinet-001.pcap` – `ICS-Profinet-003.pcap` | LLDP discovery, PN-IO cyclic data, DCERPC alarms |
+| **EtherCAT** | `ICS-Ethercat-001.pcap` | EtherCAT master/slave frames and PDO exchange |
+| **OT malware** | `ICS-OT-Malware-001.pcap` | HTTP payload retrieval in OT network context |
+| **OT network** | `ICS-OT-Network-001.pcap` | Mixed OT traffic: IEC 60870-5-104, RTSP, SNMP, SMB |
 
-Coleções antigas (4SICS, S4x15, outros protocolos, malware zips) **não estão** neste repositório; commits anteriores a v2.0.0 deixaram de existir em `main`. Para ampliar a coleção, use cópias locais, releases arquivadas ou Git LFS noutro ramo conforme necessidade.
+**25 capture files** total — `.pcap` and `.pcapng` in repository root.
 
 ---
 
@@ -28,14 +32,20 @@ Coleções antigas (4SICS, S4x15, outros protocolos, malware zips) **não estão
 Open `.pcap` / `.pcapng` files with [Wireshark](https://www.wireshark.org/) or process with `tshark`:
 
 ```bash
-# Modbus TCP — overview
+# Protocol hierarchy
+tshark -r ICS-Modbus-001.pcap -q -z io,phs
+
+# Modbus function codes
 tshark -r ICS-Modbus-001.pcap -Y "modbus" -T fields -e frame.number -e ip.src -e modbus.func_code
 
-# Modbus — all three files
-for f in ICS-Modbus-00*.pcap; do echo "=== $f ==="; tshark -r "$f" -q -z io,stat,0; done
+# TCP conversation list
+tshark -r ColetaTF02.pcap -q -z conv,tcp
 
-# Lab captures — protocol summary (adjust display filter per capture)
-tshark -r ColetaTF01.pcap -q -z io,phs
+# Follow a TCP stream (ASCII)
+tshark -r ColetaTF03.pcap -q -z follow,tcp,ascii,0
+
+# All lab captures — quick overview
+for f in ColetaTF*.pcap ColetaTF*.pcapng; do echo "=== $f ==="; tshark -r "$f" -q -z io,phs; done
 ```
 
 ---
