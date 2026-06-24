@@ -23,7 +23,7 @@ Network packet captures collected in **laboratory and controlled environments** 
 | **OT malware** | `ICS-OT-Malware-001.pcap` | HTTP payload retrieval in OT network context |
 | **OT network** | `ICS-OT-Network-001.pcap` | Mixed OT traffic: IEC 60870-5-104, RTSP, SNMP, SMB |
 
-**25 capture files** total — `.pcap` and `.pcapng` in repository root.
+**24 capture files** total — `.pcap` and `.pcapng` in repository root.
 
 ---
 
