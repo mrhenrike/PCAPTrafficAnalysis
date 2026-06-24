@@ -1,3 +1,15 @@
+# Local-only — não publicar no GitHub (PyPI, CI/CD, automação)
+pyproject.toml
+pyproject.toml.example
+.pypirc
+.env
+.env.*
+.env.example
+.github/
+.cursor/rules/local-packaging.mdc
+scripts/publish*
+tools/publish*
+
 analysis/
 *.py
 __pycache__/
